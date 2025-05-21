@@ -172,10 +172,10 @@
   <!-- ÉCRAN : Faux Téléphone -->
   <div id="screen-phone" class="screen-container active">
     <div class="contacts">
-      <div class="contact"><div class="contact-info"><div class="avatar">M</div><div><div>Maman</div><div class="phone-label">0781469118</div></div></div><div class="call-icon">📞</div></div>
-      <div class="contact"><div class="contact-info"><div class="avatar">M</div><div><div>Mathilde</div><div class="phone-label">+33788156777</div></div></div><div class="call-icon">📞</div></div>
-      <div class="contact"><div class="contact-info"><div class="avatar">L</div><div><div>Lucas</div><div class="phone-label">+33614251261</div></div></div><div class="call-icon">📞</div></div>
-      <div class="contact"><div class="contact-info"><div class="avatar">M</div><div><div>Mamie</div><div class="phone-label">+33684147749</div></div></div><div class="call-icon">📞</div></div>
+      <div class="contact"><div class="contact-info"><div class="avatar">M</div><div><div>Maman</div><div class="phone-label">0745678521</div></div></div><div class="call-icon"><i class="bi bi-telephone"></i></div></div>
+      <div class="contact"><div class="contact-info"><div class="avatar">M</div><div><div>Mathilde</div><div class="phone-label">0788005789</div></div></div><div class="call-icon"><i class="bi bi-telephone"></i></div></div>
+      <div class="contact"><div class="contact-info"><div class="avatar">L</div><div><div>Lucas</div><div class="phone-label">0654258996</div></div></div><div class="call-icon"><i class="bi bi-telephone"></i></div></div>
+      <div class="contact"><div class="contact-info"><div class="avatar">M</div><div><div>Mamie</div><div class="phone-label">0654123685</div></div></div><div class="call-icon"><i class="bi bi-telephone"></i></div></div>
     </div>
     <div class="flexquick">
       <div class="blank"></div>
@@ -195,7 +195,7 @@
       <button class="dial-button" onclick="pressKey('*')">*</button>
       <button class="dial-button" onclick="pressKey('0')">0<br><span style='font-size:0.6rem;'>+</span></button>
       <button class="dial-button" onclick="pressKey('#')">#</button>
-      <button class="call-btn" onclick="callNumber()">📞 Appeler</button>
+      <button class="call-btn" onclick="callNumber()"><i class="bi bi-telephone"></i> Appeler</button>
     </div>
   </div>
 
@@ -204,14 +204,15 @@
     <div class="avatar">A</div>
     <div class="name">Andrea</div>
     <div class="status" id="status">Appel en cours…</div>
+
     <div class="buttons">
-      <button>🎤</button>
-      <button>🔊</button>
-      <button>⏸️</button>
-      <button>🔢</button>
+      <button><i class="bi bi-mic-mute"></i></button>
+      <button><i class="bi bi-bluetooth"></i></button>
+      <button><i class="bi bi-pause"></i></button>
+      <button><i class="bi bi-grip-vertical"></i></button>
     </div>
     <div class="timer" id="timer" style="display: none;">00:00</div>
-    <button class="end-call" onclick="endCall()">📴</button>
+    <button class="end-call" onclick="endCall()"><i class="bi bi-telephone-inbound"></i></button>
   </div>
 
   <!-- Sons -->
@@ -233,7 +234,7 @@
     const screenCall = document.getElementById('screen-call');
 
     let code = '';
-    const secretCode = '4269';
+    const secretCode = '0755894174';
     let seconds = 0;
     let interval;
 
@@ -287,6 +288,7 @@
         }
       }, 1000); // simulation de délai tonalité
     }
+
 
     function endCall() {
       call.pause();
