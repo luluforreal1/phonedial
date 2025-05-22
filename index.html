@@ -237,24 +237,34 @@
 
     const screenPhone = document.getElementById('screen-phone');
     const screenCall = document.getElementById('screen-call');
+    const touchSounds = [
+  new Audio('touch1.mp3'),
+  new Audio('touch2.mp3'),
+  new Audio('touch3.mp3'),
+  new Audio('touch4.mp3'),
+  new Audio('touch5.mp3'),
+  new Audio('touch6.mp3'),
+  new Audio('touch7.mp3'),
+  new Audio('touch8.mp3')
+];
 
     
     let code = '';
     const secretCode = '0755894174';
     let seconds = 0;
     let interval;
-
-    const soundFiles = ['touch1.mp3', 'touch2.mp3', 'touch3.mp3', 'touch4.mp3'];
+    
 let lastPlayedIndex = -1;
 
 function playRandomTouchSound() {
   let index;
   do {
-    index = Math.floor(Math.random() * soundFiles.length);
-  } while (index === lastPlayedIndex);
+    index = Math.floor(Math.random() * touchSounds.length);
+  } while (index === lastSoundIndex); 
+  lastSoundIndex = index;
 
-  lastPlayedIndex = index;
-  const sound = new Audio(soundFiles[index]);
+  const sound = touchSounds[index];
+  sound.currentTime = 0;
   sound.play();
 }
 
