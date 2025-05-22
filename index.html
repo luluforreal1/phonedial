@@ -227,10 +227,6 @@
   <audio id="secretAudio" src="cell-phone-ring-in-ear_bip-79193.mp3"></audio>
 
   <script>
-    touchSounds.forEach(audio => {
-  audio.preload = 'auto';
-  audio.load(); // Forcer le préchargement
-});
     const screen = document.getElementById('screen');
     const tone = document.getElementById('toneAudio');
     const ring = document.getElementById('secretAudio');
@@ -238,62 +234,41 @@
     const hangup = document.getElementById('hangupAudio');
     const timer = document.getElementById('timer');
     const status = document.getElementById('status');
-    const touchSounds = [];
-
-for (let i = 1; i <= 8; i++) {
-  const audio = new Audio(`touch${i}.mp3`);
-  audio.preload = 'auto';
-  audio.load(); // Précharge le son dans le cache navigateur
-  touchSounds.push(audio);
-}
-    const hangupSound = new Audio('hangup.mp3');
-hangupSound.preload = 'auto';
-hangupSound.load();
-
-
-    
-
 
     const screenPhone = document.getElementById('screen-phone');
     const screenCall = document.getElementById('screen-call');
+
     
     let code = '';
     const secretCode = '0755894174';
     let seconds = 0;
     let interval;
 
-   
-
-let lastSoundIndex = -1;
+    const soundFiles = ['touch1.mp3', 'touch2.mp3', 'touch3.mp3', 'touch4.mp3'];
+let lastPlayedIndex = -1;
 
 function playRandomTouchSound() {
   let index;
   do {
-    index = Math.floor(Math.random() * touchSounds.length);
-  } while (index === lastSoundIndex); 
-  lastSoundIndex = index;
+    index = Math.floor(Math.random() * soundFiles.length);
+  } while (index === lastPlayedIndex);
 
-  const sound = touchSounds[index];
-  sound.currentTime = 0;
+  lastPlayedIndex = index;
+  const sound = new Audio(soundFiles[index]);
   sound.play();
 }
 
 
-    function formatPhoneNumber(raw) {
-  return raw.match(/.{1,2}/g)?.join(' ') || '';
-}
-
     function pressKey(key) {
       if (code.length < 10) {
         code += key;
-        playRandomTouchSound();
-        screen.textContent = formatPhoneNumber(code);
+        screen.textContent = code;
       }
     }
 
     function deleteLast() {
       code = code.slice(0, -1);
-      screen.textContent = formatPhoneNumber(code);
+      screen.textContent = code;
     }
 
     function formatTime(s) {
@@ -336,8 +311,6 @@ function playRandomTouchSound() {
 
 
     function endCall() {
-      hangupSound.currentTime = 0;
-  hangupSound.play();
       ring.pause();
       ring.currentTime = 0;
       clearInterval(interval);
@@ -353,4 +326,5 @@ function playRandomTouchSound() {
   </script>
 </body>
 </html>
+~
 
