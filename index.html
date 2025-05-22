@@ -234,7 +234,9 @@
     const hangup = document.getElementById('hangupAudio');
     const timer = document.getElementById('timer');
     const status = document.getElementById('status');
-
+    const hangupSound = new Audio('hangup.mp3');
+hangupSound.preload = 'auto';
+hangupSound.load();
     const screenPhone = document.getElementById('screen-phone');
     const screenCall = document.getElementById('screen-call');
     const touchSounds = [
@@ -324,6 +326,8 @@ function deleteLast() {
 
 
     function endCall() {
+      hangupSound.currentTime = 0;
+      hangupSound.play();
       ring.pause();
       ring.currentTime = 0;
       clearInterval(interval);
