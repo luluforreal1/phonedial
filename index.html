@@ -260,16 +260,19 @@ function playRandomTouchSound() {
 
 
     function pressKey(key) {
-      if (code.length < 10) {
-        code += key;
-        screen.textContent = code;
-      }
-    }
+  if (code.length < 10) {
+    code += key; // code reste pur, sans espaces
+    // Affiche code avec espace tous les 2 chiffres, sans modifier code
+    screen.textContent = code.replace(/(.{2})/g, '$1 ').trim();
+    playRandomTouchSound();
+  }
+}
 
-    function deleteLast() {
-      code = code.slice(0, -1);
-      screen.textContent = code;
-    }
+function deleteLast() {
+  code = code.slice(0, -1);
+  screen.textContent = code.replace(/(.{2})/g, '$1 ').trim();
+}
+
 
     function formatTime(s) {
       const mins = Math.floor(s / 60).toString().padStart(1, '0');
