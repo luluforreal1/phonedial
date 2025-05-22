@@ -238,16 +238,18 @@
     const hangup = document.getElementById('hangupAudio');
     const timer = document.getElementById('timer');
     const status = document.getElementById('status');
-    const touchSounds = [
-  new Audio('touch1.mp3'),
-  new Audio('touch2.mp3'),
-  new Audio('touch3.mp3'),
-  new Audio('touch4.mp3'),
-  new Audio('touch5.mp3'),
-  new Audio('touch6.mp3'),
-  new Audio('touch7.mp3'),
-  new Audio('touch8.mp3')
-];
+    const touchSounds = [];
+
+for (let i = 1; i <= 8; i++) {
+  const audio = new Audio(`touch${i}.mp3`);
+  audio.preload = 'auto';
+  audio.load(); // Précharge le son dans le cache navigateur
+  touchSounds.push(audio);
+}
+    const hangupSound = new Audio('hangup.mp3');
+hangupSound.preload = 'auto';
+hangupSound.load();
+
 
     
 
@@ -334,6 +336,8 @@ function playRandomTouchSound() {
 
 
     function endCall() {
+      hangupSound.currentTime = 0;
+  hangupSound.play();
       ring.pause();
       ring.currentTime = 0;
       clearInterval(interval);
