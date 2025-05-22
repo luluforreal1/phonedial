@@ -126,7 +126,7 @@
 
     /* --- ÉCRAN 2 : Appel en cours --- */
     #screen-call {
-        padding-bottom: 10%;
+        padding-bottom: 40%;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -227,6 +227,10 @@
   <audio id="secretAudio" src="cell-phone-ring-in-ear_bip-79193.mp3"></audio>
 
   <script>
+    touchSounds.forEach(audio => {
+  audio.preload = 'auto';
+  audio.load(); // Forcer le préchargement
+});
     const screen = document.getElementById('screen');
     const tone = document.getElementById('toneAudio');
     const ring = document.getElementById('secretAudio');
@@ -234,6 +238,19 @@
     const hangup = document.getElementById('hangupAudio');
     const timer = document.getElementById('timer');
     const status = document.getElementById('status');
+    const touchSounds = [
+  new Audio('touch1.mp3'),
+  new Audio('touch2.mp3'),
+  new Audio('touch3.mp3'),
+  new Audio('touch4.mp3'),
+  new Audio('touch5.mp3'),
+  new Audio('touch6.mp3'),
+  new Audio('touch7.mp3'),
+  new Audio('touch8.mp3')
+];
+
+    
+
 
     const screenPhone = document.getElementById('screen-phone');
     const screenCall = document.getElementById('screen-call');
@@ -243,19 +260,22 @@
     let seconds = 0;
     let interval;
 
-    const soundFiles = ['touch1.mp3', 'touch2.mp3', 'touch3.mp3','touch4.mp3','touch5.mp3','touch6.mp3','touch7.mp3','touch8.mp3',];
-let lastPlayedIndex = -1;
+   
+
+let lastSoundIndex = -1;
 
 function playRandomTouchSound() {
   let index;
   do {
-    index = Math.floor(Math.random() * soundFiles.length);
-  } while (index === lastPlayedIndex);
+    index = Math.floor(Math.random() * touchSounds.length);
+  } while (index === lastSoundIndex); 
+  lastSoundIndex = index;
 
-  lastPlayedIndex = index;
-  const sound = new Audio(soundFiles[index]);
+  const sound = touchSounds[index];
+  sound.currentTime = 0;
   sound.play();
 }
+
 
     function formatPhoneNumber(raw) {
   return raw.match(/.{1,2}/g)?.join(' ') || '';
