@@ -112,6 +112,11 @@
       border-radius: 2rem;
     }
 
+    .dial-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 8px #00cc66;
+}
+
     .call-btn {
       grid-column: span 3;
       background-color: #00cc66;
@@ -232,11 +237,26 @@
 
     const screenPhone = document.getElementById('screen-phone');
     const screenCall = document.getElementById('screen-call');
-
+    
     let code = '';
     const secretCode = '0755894174';
     let seconds = 0;
     let interval;
+
+    const soundFiles = ['touch1.mp3', 'touch2.mp3', 'touch3.mp3', 'touch4.mp3'];
+let lastPlayedIndex = -1;
+
+function playRandomTouchSound() {
+  let index;
+  do {
+    index = Math.floor(Math.random() * soundFiles.length);
+  } while (index === lastPlayedIndex);
+
+  lastPlayedIndex = index;
+  const sound = new Audio(soundFiles[index]);
+  sound.play();
+}
+
 
     function pressKey(key) {
       if (code.length < 10) {
